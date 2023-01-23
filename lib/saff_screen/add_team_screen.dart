@@ -56,8 +56,8 @@ class _AddTeamScreenState extends State<AddTeamScreen> {
                 sizedBox: 9,
                 title: 'Mobile',
                 hint: '+966767438234',
-                keyboardType: TextInputType.name,
-                controller: _nameController),
+                keyboardType: TextInputType.phone,
+                controller: _mobileController),
           ),
           AppTextField(
               horizontalPad: 13,
@@ -65,8 +65,8 @@ class _AddTeamScreenState extends State<AddTeamScreen> {
               sizedBox: 9,
               title: 'Password',
               hint: '******',
-              keyboardType: TextInputType.name,
-              controller: _nameController),
+              keyboardType: TextInputType.visiblePassword,
+              controller: _passwordController),
           SizedBox(height: 33.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),

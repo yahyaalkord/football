@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SaffPunishmentItem extends StatelessWidget {
@@ -34,10 +35,7 @@ class SaffPunishmentItem extends StatelessWidget {
               children: [
                 Text(
                   'PUNISHMENT ${index + 1} :',
-                  style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black),
+                  style: AppTextStyle.titleBlack,
                 ),
                 const Spacer(),
                 IconButton(

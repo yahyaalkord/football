@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/context_extenssion.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _emailController;
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
-
 
   @override
   void initState() {
@@ -42,8 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: ListView(
@@ -62,11 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Text(
                 'Create an account to get all features',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: AppColors.black,
-                ),
+                style: AppTextStyle.subTitleBlack,
               ),
             ),
             AppTextField(
@@ -118,11 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: <TextSpan>[
                   TextSpan(
                     text: ' Log in',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
+                    style: AppTextStyle.titlePrimary,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Navigator.pushReplacementNamed(
                           context, '/signin_screen'),

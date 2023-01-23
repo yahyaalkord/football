@@ -14,7 +14,7 @@ class _NewPlayersScreenState extends State<NewPlayersScreen> {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: EdgeInsetsDirectional.only(bottom: 85.h),
-      separatorBuilder: (context, index) => SizedBox(height: 12.h),
+      separatorBuilder: (context, index) => SizedBox(height: 20.h),
       itemCount: 10,
       itemBuilder: (context, index) {
         return NewPlayerItem(

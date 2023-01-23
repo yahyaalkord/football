@@ -38,33 +38,32 @@ class _TeamPlayerScreenState extends State<TeamPlayerScreen>
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         children: [
-          Column(
+          Stack(
+            alignment: AlignmentDirectional.bottomCenter,
             children: [
+              Container(
+                width: double.infinity,
+                height: 3.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: const Color(0xFFBBBBBB),
+                ),
+              ),
               TabBar(
                 onTap: (int index) {
                   setState(() {
                     _tabController.index = index;
                   });
                 },
-                // indicator: BoxDecoration(
-                //   borderRadius: BorderRadius.circular(
-                //     28.r,
-                //   ),
-                //   color: AppColors.primary,
-                // ),
                 indicatorColor: AppColors.primary,
                 labelColor: AppColors.primary,
                 unselectedLabelColor: AppColors.primary,
-                // labelStyle: TextStyle(
-                //   fontSize: 16.sp,
-                //   fontWeight: FontWeight.w500,
-                //   color: AppColors.primary,
-                // ),
-                indicatorWeight: 3.h,
-                padding: EdgeInsets.symmetric(
-                  vertical: 6.h,
-                  horizontal: 12.w,
+                labelStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primary,
                 ),
+                indicatorWeight: 3.h,
                 controller: _tabController,
                 tabs: const [
                   Tab(
@@ -95,7 +94,6 @@ class _TeamPlayerScreenState extends State<TeamPlayerScreen>
               ),
             ),
           ),
-          // TabBar(tabs: [],),
         ],
       ),
     );

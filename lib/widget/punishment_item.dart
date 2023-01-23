@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PunishmentItem extends StatelessWidget {
@@ -27,18 +28,12 @@ class PunishmentItem extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(top: 19.h, bottom: 8.h),
             child: Text(
               'PUNISHMENT ${index + 1} :',
-              style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black),
+              style: AppTextStyle.titleBlack,
             ),
           ),
           Text(
             desc,
-            style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black),
+            style: AppTextStyle.headTitleBlack,
           ),
           SizedBox(height: 16.h),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/custom_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +35,6 @@ class ContractItem extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 8.h),
           child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
@@ -58,10 +58,7 @@ class ContractItem extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.black),
+                            style: AppTextStyle.titleBlack,
                           ),
                           const Spacer(),
                           Text(
@@ -75,13 +72,10 @@ class ContractItem extends StatelessWidget {
                       ),
                       Padding(
                         padding:
-                        EdgeInsetsDirectional.only(top: 11.h, bottom: 1.h),
+                            EdgeInsetsDirectional.only(top: 11.h, bottom: 1.h),
                         child: Text(
                           'About the player:',
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primary),
+                          style: AppTextStyle.subTitlePrimary,
                         ),
                       ),
                       Text(
@@ -97,19 +91,11 @@ class ContractItem extends StatelessWidget {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: 'Player evaluation: ',
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.primary,
-                          ),
+                          style: AppTextStyle.subTitlePrimary,
                           children: <TextSpan>[
                             TextSpan(
                               text: evaluation.toString(),
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black,
-                              ),
+                              style: AppTextStyle.headTitleBlack,
                             ),
                           ],
                         ),

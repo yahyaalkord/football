@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/widget/contract_item.dart';
+
+class MedicalTeamContract extends StatefulWidget {
+  const MedicalTeamContract({Key? key}) : super(key: key);
+
+  @override
+  State<MedicalTeamContract> createState() => _MedicalTeamContractState();
+}
+
+class _MedicalTeamContractState extends State<MedicalTeamContract> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsetsDirectional.only(top: 25.h,bottom: 15.h),
+      separatorBuilder: (context, index) => SizedBox(height: 12.h),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return ContractItem(
+          img: 'assets/images/user.png',
+          name: 'Ahmed Ali',
+          contYear: 'contract with 2 years',
+          about:
+          'Lorem Ipsum is simply dummy text of the printing and type setting industry Lorem Ipsum has beenthe industry\'s',
+          evaluation: 8.4,
+          onPressed: () {
+            Navigator.pushNamed(context, '/player_details_screen');
+          },
+        );
+      },
+    );
+  }
+}

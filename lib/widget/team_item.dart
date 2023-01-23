@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TeamItem extends StatelessWidget {
@@ -51,19 +52,11 @@ class TeamItem extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: 'Team Name: ',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                    ),
+                    style: AppTextStyle.titleBlack,
                     children: <TextSpan>[
                       TextSpan(
                         text: teamName,
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
+                        style: AppTextStyle.titlePrimary,
                       ),
                     ],
                   ),
@@ -75,19 +68,11 @@ class TeamItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text: 'Team Mobile: ',
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.black,
-                      ),
+                      style: AppTextStyle.titleBlack,
                       children: <TextSpan>[
                         TextSpan(
                           text: mobile,
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
-                          ),
+                          style: AppTextStyle.titlePrimary,
                         ),
                       ],
                     ),
@@ -98,11 +83,7 @@ class TeamItem extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: 'Team Players: ',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                    ),
+                    style: AppTextStyle.titleBlack,
                     children: <TextSpan>[
                       TextSpan(
                         text: playerNo.toString(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:football/saff_screen/add_punishments_screen.dart';
 import 'package:football/saff_screen/add_team_screen.dart';
 import 'package:football/saff_screen/saff_player_details_screen.dart';
@@ -20,12 +21,10 @@ import 'package:football/teams_screen/player_details_screen.dart';
 import 'package:football/teams_screen/profile_screen.dart';
 import 'package:football/teams_screen/punishment_screen.dart';
 import 'package:football/teams_screen/stats_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'helpers/app_colors.dart';
 
 void main() async {
-  runApp(const MyApp(),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -53,17 +52,13 @@ class MyApp extends StatelessWidget {
               iconTheme: const IconThemeData(
                 color: Color(0xFF200E32),
               ),
-              titleTextStyle: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
-              ),
+              titleTextStyle: AppTextStyle.titleBlack,
             ),
           ),
           // ********* Teams Screens
-          // initialRoute: '/launch_screen',
+          initialRoute: '/launch_screen',
           //********** SAFF Screens
-          initialRoute: '/saff_view_screen',
+          // initialRoute: '/saff_view_screen',
           routes: {
             '/launch_screen': (context) => const LaunchScreen(),
             '/signup_screen': (context) => const SignUpScreen(),

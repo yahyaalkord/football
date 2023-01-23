@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/helpers/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../helpers/app_colors.dart';
 
@@ -33,18 +34,12 @@ class StatsItem extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(top: 31.h, bottom: 10.h),
             child: Text(
               title,
-              style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black),
+              style: AppTextStyle.titleBlack,
             ),
           ),
           Text(
             count.toString(),
-            style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary),
+            style: AppTextStyle.titlePrimary,
           ),
         ],
       ),
