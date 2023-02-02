@@ -116,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     style: AppTextStyle.titlePrimary,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Navigator.pushReplacementNamed(
-                          context, '/saff_signin_screen'),
+                          context, '/team_signin_screen'),
                   ),
                 ],
               ),

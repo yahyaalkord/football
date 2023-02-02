@@ -10,6 +10,7 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.backgroundColor = AppColors.primary,
     this.borderColor = Colors.transparent,
+    this.textColor = AppColors.white,
     this.fontSize = 16,
     this.width = double.infinity,
     this.height = 48,
@@ -20,6 +21,7 @@ class AppButton extends StatelessWidget {
   final void Function() onPressed;
   final Color backgroundColor;
   final Color borderColor;
+  final Color textColor;
   final double fontSize;
   final double width;
   final double height;
@@ -47,7 +49,7 @@ class AppButton extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: fontSize,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white,
+                  color: textColor,
                 ),
               ),
       ),

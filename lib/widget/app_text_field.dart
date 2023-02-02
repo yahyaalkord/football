@@ -25,6 +25,7 @@ class AppTextField extends StatelessWidget {
     this.horizontalPad = 13,
     this.verticalPad = 0,
     this.readOnly = false,
+    this.onClicked,
   }) : super(key: key);
 
   final String? label;
@@ -39,6 +40,7 @@ class AppTextField extends StatelessWidget {
   final int height;
   final void Function(String)? onSubmitted;
   final Function(String value)? onChange;
+  final void Function()? onClicked;
   final String? title;
   final bool isColumn;
   final int? minLines;
@@ -60,52 +62,68 @@ class AppTextField extends StatelessWidget {
                     color: AppColors.black))
             : const SizedBox(),
         SizedBox(height: isColumn ? sizedBox.h : 0),
-        SizedBox(
-          height: height.h,
-          width: double.infinity,
-          child: TextField(
-            readOnly: readOnly,
-            minLines: minLines,
-            maxLines: maxLines,
-            cursorColor: AppColors.primary,
-            cursorHeight: 20.h,
-            textInputAction: TextInputAction.done,
-            onSubmitted: onSubmitted,
-            controller: controller,
-            keyboardType: keyboardType,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColors.black,
+        Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            SizedBox(
+              height: height.h,
+              width: double.infinity,
+              child: TextField(
+                readOnly: readOnly,
+                minLines: minLines,
+                maxLines: maxLines,
+                cursorColor: AppColors.primary,
+                cursorHeight: 20.h,
+                textInputAction: TextInputAction.done,
+                onSubmitted: onSubmitted,
+                controller: controller,
+                keyboardType: keyboardType,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+                obscureText: obscureText,
+                decoration: InputDecoration(
+                  fillColor: AppColors.white,
+                  filled: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: horizontalPad.w,
+                    vertical: verticalPad.h
+                  ),
+                  labelText: label,
+                  hintText: hint,
+                  hintStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: AppColors.sameGrey,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  labelStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: AppColors.sameGrey,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  hintMaxLines: 1,
+                  suffixIcon: CircleAvatar(
+                      backgroundColor: Colors.transparent, child: suffixIcon),
+                  enabledBorder: buildOutlineInputBorder(),
+                  focusedBorder:
+                      buildOutlineInputBorder(),
+                ),
+              ),
             ),
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              fillColor: AppColors.white,
-              filled: true,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: horizontalPad.w,
-                vertical: verticalPad.h
+            Visibility(
+              visible: readOnly,
+              child: InkWell(
+                onTap: onClicked,
+                child: Container(
+                  color: Colors.transparent,
+                  height: height.h,
+                  width: double.infinity,
+                ),
               ),
-              labelText: label,
-              hintText: hint,
-              hintStyle: GoogleFonts.poppins(
-                fontSize: 14,
-                color: AppColors.black.withOpacity(0.30),
-                fontWeight: FontWeight.w400,
-              ),
-              labelStyle: GoogleFonts.poppins(
-                fontSize: 14,
-                color: AppColors.sameGrey,
-                fontWeight: FontWeight.w500,
-              ),
-              hintMaxLines: 1,
-              suffixIcon: CircleAvatar(
-                  backgroundColor: Colors.transparent, child: suffixIcon),
-              enabledBorder: buildOutlineInputBorder(),
-              focusedBorder:
-                  buildOutlineInputBorder(),
             ),
-          ),
+          ],
         ),
       ],
     );

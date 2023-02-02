@@ -6,8 +6,10 @@ import 'package:football/helpers/app_colors.dart';
 import 'package:football/model/dropdow_model.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
+import 'package:football/widget/calender_dialog.dart';
 import 'package:football/widget/drop_down.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   const AddPlayerScreen({Key? key}) : super(key: key);
@@ -55,6 +57,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
     DropdownModel(id: 3, title: 'nationality'),
   ];
   int? selectedNationality;
+  DateTime today = DateTime.now();
+  String birthday = 'Choose date';
+  String beginning = 'Choose date';
+  String end = 'Choose date';
 
   @override
   Widget build(BuildContext context) {
@@ -89,10 +95,11 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 23.h),
             child: AppTextField(
+              onClicked: () => _chooseBirthday(),
                 readOnly: true,
                 isColumn: true,
                 title: 'Player birthday',
-                hint: 'Choose date',
+                hint: birthday,
                 suffixIcon: SvgPicture.asset(
                   'assets/svg_images/date.svg',
                   width: 18.w,
@@ -117,10 +124,11 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 23.h),
             child: AppTextField(
+              onClicked: () => _beginningDate(),
                 readOnly: true,
                 isColumn: true,
                 title: 'Beginning of the contract ',
-                hint: 'Choose date',
+                hint: beginning,
                 suffixIcon: SvgPicture.asset(
                   'assets/svg_images/date.svg',
                   width: 18.w,
@@ -130,10 +138,11 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                 controller: _beginningController),
           ),
           AppTextField(
+              onClicked: () => _endDate(),
               readOnly: true,
               isColumn: true,
               title: 'End of the contract ',
-              hint: 'Choose date',
+              hint: end,
               suffixIcon: SvgPicture.asset(
                 'assets/svg_images/date.svg',
                 width: 18.w,
@@ -193,4 +202,62 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
       ),
     );
   }
+
+  void _chooseBirthday() async {
+    showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return CalenderDialog(
+            focusedDay: today,
+            selectedDay: (day) => isSameDay(day, today),
+            onDaySelected: (DateTime day, DateTime focusDat) {
+              setState(() {
+                today = day;
+                birthday = today.toString().split(' ')[0];
+                Navigator.pop(context);
+              });
+            },
+          );
+        });
+  }
+
+  void _beginningDate() async {
+    showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return CalenderDialog(
+            focusedDay: today,
+            selectedDay: (day) => isSameDay(day, today),
+            onDaySelected: (DateTime day, DateTime focusDat) {
+              setState(() {
+                today = day;
+                beginning = today.toString().split(' ')[0];
+                Navigator.pop(context);
+              });
+            },
+          );
+        });
+  }
+
+  void _endDate() async {
+    showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return CalenderDialog(
+            focusedDay: today,
+            selectedDay: (day) => isSameDay(day, today),
+            onDaySelected: (DateTime day, DateTime focusDat) {
+              setState(() {
+                today = day;
+                end = today.toString().split(' ')[0];
+                Navigator.pop(context);
+              });
+            },
+          );
+        });
+  }
+
 }

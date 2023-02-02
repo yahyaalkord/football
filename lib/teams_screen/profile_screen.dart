@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           CustomListTile(
             title: 'Edit Profile',
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/edit_profile_screen'),
           ),
           CustomListTile(
             title: 'Sponsors',
@@ -57,7 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           CustomListTile(
             title: 'Matches',
-            onPressed: () => Navigator.pushNamed(context, '/matches_list_screen'),
+            onPressed: () =>
+                Navigator.pushNamed(context, '/matches_list_screen'),
           ),
           CustomListTile(
             title: 'News',
@@ -65,15 +66,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           CustomListTile(
             title: 'App Privacy',
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/privacy_screen'),
           ),
           CustomListTile(
             title: 'About Us',
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/about_us_screen'),
           ),
           CustomListTile(
             title: 'Contact Us',
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/contact_screen'),
             divider: false,
           ),
           SizedBox(height: 25.h),

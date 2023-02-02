@@ -46,32 +46,24 @@ class _VisitorNewsScreenState extends State<VisitorNewsScreen> {
               itemCount: club.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      tabIndex = index;
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 50),
-                    // width: 123.w,
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: const Color(0xFFF4F6FC),
-                    ),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset('assets/svg_images/Star.svg',
-                              width: 20.w, height: 19.h),
-                          SizedBox(width: 3.w),
-                          Text(
-                            club[index],
-                            style: AppTextStyle.titlePrimary,
-                          ),
-                        ],
-                      ),
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 50),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: const Color(0xFFF4F6FC),
+                  ),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        SvgPicture.asset('assets/svg_images/Star.svg',
+                            width: 20.w, height: 19.h),
+                        SizedBox(width: 3.w),
+                        Text(
+                          club[index],
+                          style: AppTextStyle.titlePrimary,
+                        ),
+                      ],
                     ),
                   ),
                 );

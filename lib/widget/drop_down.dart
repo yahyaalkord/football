@@ -36,7 +36,13 @@ class _CustomDropdownState extends State<CustomDropdown> {
             color: AppColors.white,
           ),
           child: DropdownButton<int>(
-            hint: Text(widget.hint,style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.black.withOpacity(0.30)),),
+            hint: Text(
+              widget.hint,
+              style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.sameGrey),
+            ),
             isExpanded: true,
             underline: const SizedBox(),
             onChanged: (int? value) {
@@ -52,18 +58,15 @@ class _CustomDropdownState extends State<CustomDropdown> {
             ),
             value: widget.valueTitle,
             items: widget.itemsTitle.map(
-                  (item) {
+              (item) {
                 return DropdownMenuItem<int>(
                   value: item.id,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(start: 12.w),
-                    child: Text(
-                      item.title,
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
+                  child: Text(
+                    item.title,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
                     ),
                   ),
                 );

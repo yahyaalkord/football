@@ -53,7 +53,7 @@ class _VisitorProfileScreenState extends State<VisitorProfileScreen> {
           ),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, '/privacy_screen'),
             dense: true,
             title: Text(
               'Privacy',

@@ -25,7 +25,7 @@ class _NewsScreenState extends State<NewsScreen> {
         itemCount: 4,
         itemBuilder: (context, index) {
           return NewItem(
-            img: 'assets/images/user3.png',
+            img: 'assets/images/new.png',
             name: 'New Title',
             dec:
                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',

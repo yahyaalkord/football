@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
+import 'package:football/widget/calender_dialog.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({Key? key}) : super(key: key);
@@ -16,6 +18,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
   late TextEditingController _dateController;
   late TextEditingController _desController;
   late TextEditingController _photoController;
+  DateTime today = DateTime.now();
+  String date = 'Choose date';
 
   @override
   void initState() {
@@ -47,16 +51,17 @@ class _AddNewScreenState extends State<AddNewScreen> {
           AppTextField(
               isColumn: true,
               title: 'New title',
-              hint: 'new title',
+              hint: 'New title',
               keyboardType: TextInputType.text,
               controller: _titleController),
           Padding(
               padding: EdgeInsets.symmetric(vertical: 16.h),
               child: AppTextField(
+                onClicked: () => _openCalender(),
                   readOnly: true,
                   isColumn: true,
                   title: 'New Date',
-                  hint: 'Choose date',
+                  hint: date,
                   suffixIcon: SvgPicture.asset(
                     'assets/svg_images/date.svg',
                     width: 18.w,
@@ -71,7 +76,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
               minLines: 10,
               maxLines: 12,
               title: 'New description',
-              hint: 'description',
+              hint: 'Description',
               keyboardType: TextInputType.text,
               controller: _desController),
           Padding(
@@ -80,7 +85,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 readOnly: true,
                 isColumn: true,
                 title: 'New Photo',
-                hint: 'add photo',
+                hint: 'Add photo',
                 suffixIcon: SvgPicture.asset(
                   'assets/svg_images/photo.svg',
                   width: 20.w,
@@ -101,5 +106,23 @@ class _AddNewScreenState extends State<AddNewScreen> {
         ],
       ),
     );
+  }
+  void _openCalender() async {
+    showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return CalenderDialog(
+            focusedDay: today,
+            selectedDay: (day) => isSameDay(day, today),
+            onDaySelected: (DateTime day, DateTime focusDat) {
+              setState(() {
+                today = day;
+                date = today.toString().split(' ')[0];
+                Navigator.pop(context);
+              });
+            },
+          );
+        });
   }
 }
