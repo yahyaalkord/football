@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:football/helpers/app_colors.dart';
-import 'package:football/teams_screen/saff_punishhment_item.dart';
+import 'package:football/widget/custom_floating_button.dart';
+import 'package:football/widget/saff_punishhment_item.dart';
 
 class SaffPunishmentScreen extends StatefulWidget {
   const SaffPunishmentScreen({Key? key}) : super(key: key);
@@ -24,27 +24,21 @@ class _SaffPunishmentScreenState extends State<SaffPunishmentScreen> {
         itemBuilder: (context, index) {
           return SaffPunishmentItem(
             index: index,
-            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummytext ever since the 1500s',
-          onDeletePress: () {},
+            desc:
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummytext ever since the 1500s',
+            For: 'Saudia team',
+            onDeletePress: () {},
             onEditPress: () {
               Navigator.pushNamed(context, '/add_punishments_screen');
             },
           );
         },
       ),
-      floatingActionButton:
-      Padding(
+      floatingActionButton: Padding(
         padding: EdgeInsetsDirectional.only(bottom: 5.h),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/add_punishments_screen');
-          },
-          backgroundColor: AppColors.primary,
-          elevation: 0,
-          child: const Icon(
-            Icons.add,
-            size: 42,
-          ),
+        child: CustomFloatingButton(
+          onPressed: () =>
+              Navigator.pushNamed(context, '/add_punishments_screen'),
         ),
       ),
     );

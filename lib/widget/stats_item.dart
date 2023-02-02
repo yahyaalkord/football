@@ -9,39 +9,44 @@ class StatsItem extends StatelessWidget {
     Key? key,
     required this.title,
     required this.count,
+    this.onPress,
   }) : super(key: key);
   final String title;
   final int count;
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 102,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.r),
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.16),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.only(top: 31.h, bottom: 10.h),
-            child: Text(
-              title,
-              style: AppTextStyle.titleBlack,
+    return InkWell(
+      onTap: onPress,
+      child: Container(
+        height: 102,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.r),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.16),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
             ),
-          ),
-          Text(
-            count.toString(),
-            style: AppTextStyle.titlePrimary,
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.only(top: 31.h, bottom: 10.h),
+              child: Text(
+                title,
+                style: AppTextStyle.titleBlack,
+              ),
+            ),
+            Text(
+              count.toString(),
+              style: AppTextStyle.titlePrimary,
+            ),
+          ],
+        ),
       ),
     );
   }

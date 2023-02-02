@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/widget/custom_floating_button.dart';
 import 'package:football/widget/team_item.dart';
 
 class TeamsScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _TeamsScreenState extends State<TeamsScreen> {
       body: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 25.h),
         separatorBuilder: (context, index) => SizedBox(height: 38.h),
-        itemCount: 4,
+        itemCount: 3,
         itemBuilder: (context, index) {
           return TeamItem(
             onPress: () {
@@ -29,11 +30,15 @@ class _TeamsScreenState extends State<TeamsScreen> {
             mobile: '+96656473802',
             playerNo: 11,
             onDeletePress: () {},
-            onEditPress: () {
-              Navigator.pushNamed(context, '/add_team_screen');
-            },
+            onEditPress: () {},
           );
         },
+      ),
+      floatingActionButton: Padding(
+        padding: EdgeInsetsDirectional.only(bottom: 5.h),
+        child: CustomFloatingButton(
+          onPressed: () => Navigator.pushNamed(context, '/add_team_screen'),
+        ),
       ),
     );
   }

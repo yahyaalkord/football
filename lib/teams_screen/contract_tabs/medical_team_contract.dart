@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:football/widget/contract_item.dart';
+import 'package:football/widget/medical_team_item.dart';
+import 'package:football/widget/team_member_item.dart';
 
 class MedicalTeamContract extends StatefulWidget {
   const MedicalTeamContract({Key? key}) : super(key: key);
@@ -16,16 +17,14 @@ class _MedicalTeamContractState extends State<MedicalTeamContract> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsetsDirectional.only(top: 25.h,bottom: 15.h),
-      separatorBuilder: (context, index) => SizedBox(height: 12.h),
+      separatorBuilder: (context, index) => SizedBox(height: 20.h),
       itemCount: 4,
       itemBuilder: (context, index) {
-        return ContractItem(
+        return MedicalTeamItem(
           img: 'assets/images/user.png',
           name: 'Ahmed Ali',
-          contYear: 'contract with 2 years',
-          about:
-          'Lorem Ipsum is simply dummy text of the printing and type setting industry Lorem Ipsum has beenthe industry\'s',
-          evaluation: 8.4,
+          email: 'ahmedali@gmail.com',
+          specialization: 'Specialization title',
           onPressed: () {
             Navigator.pushNamed(context, '/player_details_screen');
           },

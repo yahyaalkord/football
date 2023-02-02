@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:football/widget/app_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football/helpers/app_colors.dart';
 import 'package:football/widget/custom_details.dart';
 
 class PlayerDetailsScreen extends StatefulWidget {
@@ -16,33 +17,34 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Player Details'),
+        actions: [
+          IconButton(
+            padding: EdgeInsetsDirectional.only(end: 16.w),
+            constraints: const BoxConstraints(),
+            onPressed: () =>
+                Navigator.pushNamed(context, '/player_evaluation_screen'),
+            icon: SvgPicture.asset(
+              "assets/svg_images/contract.svg",
+              width: 20,
+              height: 20,
+              color: AppColors.primary,
+            ),
+          ),
+        ],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 25.h),
-        children: [
-          const CustomDetails(
-            img: 'assets/images/user.png',
+        children: const [
+          CustomDetails(
+            img: 'assets/images/user3.png',
             name: 'Ahmed Ali',
             evaluation: 8.4,
-            about:
-                'Lorem Ipsum is simply dummy text of the printing and type setting industry Lorem Ipsum has been the industry\'s',
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.only(
-                top: 50.h, bottom: 10.h, start: 14.w, end: 14.w),
-            child: AppButton(
-              text: 'Request SAFF to Add Player',
-              onPressed: () {},
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w),
-            child: AppButton(
-              text: 'Add Contract',
-              onPressed: () {
-                Navigator.pushNamed(context, '/add_contract_screen');
-              },
-            ),
+            startDate: '2023-1-23',
+            endDate: '2023-1-23',
+            topPad: 30,
+            bottomPad: 35,
+            topHeight: 14,
+            bottomHeight: 20,
           ),
         ],
       ),

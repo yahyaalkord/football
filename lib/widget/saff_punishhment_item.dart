@@ -10,11 +10,13 @@ class SaffPunishmentItem extends StatelessWidget {
     Key? key,
     required this.index,
     required this.desc,
+    required this.For,
     required this.onDeletePress,
     required this.onEditPress,
   }) : super(key: key);
   final int index;
   final String desc;
+  final String For;
   final void Function() onDeletePress;
   final void Function() onEditPress;
 
@@ -59,12 +61,18 @@ class SaffPunishmentItem extends StatelessWidget {
           ),
           Text(
             desc,
-            style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black),
+            style: AppTextStyle.headTitleBlack,
           ),
-          SizedBox(height: 16.h),
+          Padding(
+            padding: EdgeInsetsDirectional.only(top: 4.h,bottom: 12.h),
+            child: Text(
+              'For: $For',
+              style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primary),
+            ),
+          ),
         ],
       ),
     );

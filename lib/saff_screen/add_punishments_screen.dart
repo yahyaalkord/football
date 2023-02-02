@@ -50,14 +50,13 @@ class _AddPunishmentScreenState extends State<AddPunishmentScreen> {
         children: [
           AppTextField(
               isColumn: true,
-              sizedBox: 9,
-              horizontalPad: 13,
+              sizedBox: 13,
               title: 'Punishment Title:',
               hint: 'Punishment title',
               keyboardType: TextInputType.name,
               controller: _titleController),
           Padding(
-            padding: EdgeInsetsDirectional.only(top: 21.h,bottom: 9.h),
+            padding: EdgeInsetsDirectional.only(top: 30.h,bottom: 13.h),
             child: Text(
               'Punishment for team:',
               style: GoogleFonts.poppins(
@@ -66,17 +65,17 @@ class _AddPunishmentScreenState extends State<AddPunishmentScreen> {
                   color: AppColors.black),
             ),
           ),
-          DropdownPunishment(
+          CustomDropdown(
+            hint: 'team name',
               onPressed: () {},
               itemsTitle: _punishment,
               valueTitle: selectedPunishment),
           Padding(
-            padding: EdgeInsetsDirectional.only(top: 21.h,bottom: 33.h),
+            padding: EdgeInsetsDirectional.only(top: 30.h,bottom: 32.h),
             child: AppTextField(
                 isColumn: true,
-                sizedBox: 9,
+                sizedBox: 13,
                 height: 138,
-                horizontalPad: 13,
                 verticalPad: 20,
                 minLines: 10,
                 maxLines: 12,

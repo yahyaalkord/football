@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/text_style.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PunishmentItem extends StatelessWidget {
   const PunishmentItem({
@@ -16,7 +15,8 @@ class PunishmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6.w),
+      padding: EdgeInsetsDirectional.only(
+          start: 6.w, end: 5.w, top: 19.h, bottom: 16.h),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(5.r),
@@ -24,18 +24,15 @@ class PunishmentItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsetsDirectional.only(top: 19.h, bottom: 8.h),
-            child: Text(
-              'PUNISHMENT ${index + 1} :',
-              style: AppTextStyle.titleBlack,
-            ),
+          Text(
+            'PUNISHMENT ${index + 1} :',
+            style: AppTextStyle.titleBlack,
           ),
+          SizedBox(height: 8.h),
           Text(
             desc,
             style: AppTextStyle.headTitleBlack,
           ),
-          SizedBox(height: 16.h),
         ],
       ),
     );

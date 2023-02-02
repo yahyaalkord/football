@@ -24,88 +24,90 @@ class PlayerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            border: Border.all(color: AppColors.grey, width: 1.5),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 8.h),
-          child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                clipBehavior: Clip.antiAlias,
-                width: 95.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  border: Border.all(color: AppColors.grey),
+    return InkWell(
+      onTap: onPressed,
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 8.h),
+            child: Row(
+              children: [
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  width: 95.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(color: AppColors.grey, width: 15, strokeAlign: StrokeAlign.outside),
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 8.h),
+                  child: Image.asset(img, fit: BoxFit.cover),
                 ),
-                margin: EdgeInsets.symmetric(vertical: 8.h),
-                child: Image.asset(img, fit: BoxFit.cover),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(
-                      start: 6.w, top: 2.h, bottom: 2.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        name,
-                        style: AppTextStyle.titleBlack,
-                      ),
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.only(top: 11.h, bottom: 1.h),
-                        child: Text(
-                          'About the player:',
-                          style: AppTextStyle.subTitlePrimary,
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(
+                        start: 6.w, top: 2.h, bottom: 2.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          name,
+                          style: AppTextStyle.titleBlack,
                         ),
-                      ),
-                      Text(
-                        about,
-                        style: GoogleFonts.poppins(
-                            fontSize: 8,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.boldBlack),
-                      ),
-                      SizedBox(height: 11.h),
-                      RichText(
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: 'Player evaluation: ',
-                          style: AppTextStyle.subTitlePrimary,
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: evaluation.toString(),
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black,
+                        Padding(
+                          padding:
+                          EdgeInsetsDirectional.only(top: 11.h, bottom: 1.h),
+                          child: Text(
+                            'About the player:',
+                            style: AppTextStyle.subTitlePrimary,
+                          ),
+                        ),
+                        Text(
+                          about,
+                          style: GoogleFonts.poppins(
+                              fontSize: 8,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.boldBlack),
+                        ),
+                        SizedBox(height: 11.h),
+                        RichText(
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'Player evaluation: ',
+                            style: AppTextStyle.subTitlePrimary,
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: evaluation.toString(),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.black,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        PositionedDirectional(
-          end: 6.w,
-          bottom: 18.h,
-          child: CustomButton(
-            onPressed: onPressed,
+          PositionedDirectional(
+            end: 6.w,
+            bottom: 18.h,
+            child: CustomButton(
+              onPressed: onPressed,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

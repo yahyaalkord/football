@@ -57,16 +57,12 @@ class _ViewScreenState extends State<ViewScreen> {
                 setState(() => selectedScreenIndex = 0);
               },
               icon: 'stats',
-              height: 23,
-              width: 23,
               isSelected: selectedScreenIndex == 0,
             ),
             BottomNavItem(
               title: 'Contracts',
               onPressed: () => setState(() => selectedScreenIndex = 1),
               icon: 'contract',
-              height: 23,
-              width: 23,
               isSelected: selectedScreenIndex == 1,
             ),
             BottomNavItem(
@@ -75,16 +71,12 @@ class _ViewScreenState extends State<ViewScreen> {
                 setState(() => selectedScreenIndex = 2);
               },
               icon: 'market',
-              height: 23,
-              width: 23,
               isSelected: selectedScreenIndex == 2,
             ),
             BottomNavItem(
               title: 'Punishments',
               onPressed: () => setState(() => selectedScreenIndex = 3),
               icon: 'punishment',
-              height: 23,
-              width: 23,
               isSelected: selectedScreenIndex == 3,
             ),
             BottomNavItem(
@@ -93,8 +85,6 @@ class _ViewScreenState extends State<ViewScreen> {
                 setState(() => selectedScreenIndex = 4);
               },
               icon: 'profile',
-              height: 23,
-              width: 23,
               isSelected: selectedScreenIndex == 4,
             ),
           ],

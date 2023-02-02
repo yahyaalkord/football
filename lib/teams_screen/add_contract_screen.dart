@@ -40,14 +40,13 @@ class _AddContractScreenState extends State<AddContractScreen> {
             img: 'assets/images/user.png',
             name: 'Ahmed Ali',
             evaluation: 8.4,
-            about:
-                'Lorem Ipsum is simply dummy text of the printing and type setting industry Lorem Ipsum has been the industry\'s',
+            startDate: '',
+            endDate: '',
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 42.h),
             child: AppTextField(
                 isColumn: true,
-                horizontalPad: 13,
                 title: 'Pdf Contract File',
                 hint: 'Choose file',
                 keyboardType: TextInputType.name,

@@ -15,7 +15,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
     return ListView.separated(
       padding: EdgeInsetsDirectional.only(bottom: 85.h),
       separatorBuilder: (context, index) => SizedBox(height: 20.h),
-      itemCount: 10,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return PlayerItem(
           img: 'assets/images/user2.png',

@@ -15,7 +15,7 @@ class _NewPlayersScreenState extends State<NewPlayersScreen> {
     return ListView.separated(
       padding: EdgeInsetsDirectional.only(bottom: 85.h),
       separatorBuilder: (context, index) => SizedBox(height: 20.h),
-      itemCount: 10,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return NewPlayerItem(
           img: 'assets/images/user2.png',

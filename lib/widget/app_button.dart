@@ -10,23 +10,31 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.backgroundColor = AppColors.primary,
     this.borderColor = Colors.transparent,
+    this.fontSize = 16,
+    this.width = double.infinity,
+    this.height = 48,
+    this.radius = 20,
   }) : super(key: key);
 
   final String text;
   final void Function() onPressed;
   final Color backgroundColor;
   final Color borderColor;
+  final double fontSize;
+  final double width;
+  final double height;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity.w,
-      height: 48.h,
+      width: width.w,
+      height: height.h,
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsetsDirectional.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
+            borderRadius: BorderRadius.circular(radius.r),
           ),
           backgroundColor: backgroundColor,
           side: BorderSide(
@@ -37,7 +45,7 @@ class AppButton extends StatelessWidget {
         child: Text(
                 text,
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: fontSize,
                   fontWeight: FontWeight.w500,
                   color: AppColors.white,
                 ),

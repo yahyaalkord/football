@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
     return CircleAvatar(
       radius: radius.r,
       backgroundColor: backgroundColor,
-      child:   IconButton(
+      child: IconButton(
         padding: EdgeInsets.zero,
         onPressed: onPressed,
         icon: Icon(

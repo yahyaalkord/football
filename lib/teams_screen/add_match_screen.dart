@@ -52,7 +52,7 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 25.h),
         children: [
           AppTextField(
-              horizontalPad: 13,
+            readOnly: true,
               isColumn: true,
               title: 'Match Date',
               hint: 'Choose date',
@@ -66,7 +66,7 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 21.h),
             child: AppTextField(
-                horizontalPad: 13,
+              readOnly: true,
                 isColumn: true,
                 title: 'Match Time',
                 hint: 'Choose time',
@@ -79,7 +79,6 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
                 controller: _timeController),
           ),
           AppTextField(
-              horizontalPad: 13,
               isColumn: true,
               title: 'Team A',
               hint: 'Team name',
@@ -88,7 +87,6 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 21.h),
             child: AppTextField(
-                horizontalPad: 13,
                 isColumn: true,
                 title: 'Team B',
                 hint: 'Team name',
@@ -96,7 +94,6 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
                 controller: _teamBController),
           ),
           AppTextField(
-              horizontalPad: 13,
               isColumn: true,
               title: 'Stadium',
               hint: 'Stadium name',
@@ -105,7 +102,6 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
           Padding(
             padding: EdgeInsetsDirectional.only(top: 21.h, bottom: 34.h),
             child: AppTextField(
-                horizontalPad: 13,
                 isColumn: true,
                 title: 'Referee',
                 hint: 'referee name',

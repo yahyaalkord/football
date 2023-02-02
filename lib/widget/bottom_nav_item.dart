@@ -18,39 +18,44 @@ class BottomNavItem extends StatelessWidget {
     required this.onPressed,
     required this.title,
     this.isSelected = false,
-    this.width = 25,
-    this.height = 25,
+    this.width = 21,
+    this.height = 21,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          icon: SvgPicture.asset(
-            "assets/svg_images/$icon.svg",
-            width: width,
-            height: height,
-            color: isSelected ? AppColors.primary : const Color(0xFFBBBBBB),
+    return InkWell(
+      onTap: onPressed,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            padding: EdgeInsetsDirectional.only(bottom: 9.h),
+            constraints: const BoxConstraints(),
+            onPressed: onPressed,
+            icon: SvgPicture.asset(
+              "assets/svg_images/$icon.svg",
+              width: width,
+              height: height,
+              color: isSelected ? AppColors.primary : const Color(0xFFBBBBBB),
+            ),
           ),
-        ),
-        Text(
-          title,
-          style: GoogleFonts.poppins(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black),
-        ),
-        SizedBox(height: 5.h),
-        Visibility(
-            visible: isSelected,
-            child: CircleAvatar(
-              radius: 3.r,
-              backgroundColor: AppColors.primary,
-            )),
-      ],
+          Text(
+            title,
+            style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black),
+          ),
+          SizedBox(height: 6.h),
+          Visibility(
+              visible: isSelected,
+              child: CircleAvatar(
+                radius: 3.r,
+                backgroundColor: AppColors.primary,
+              )),
+        ],
+      ),
     );
   }
 }

@@ -8,33 +8,27 @@ import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class TeamSignInScreen extends StatefulWidget {
+  const TeamSignInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<TeamSignInScreen> createState() => _TeamSignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _TeamSignInScreenState extends State<TeamSignInScreen> {
   late TextEditingController _nameController;
-  late TextEditingController _emailController;
-  late TextEditingController _mobileController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController();
-    _emailController = TextEditingController();
-    _mobileController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
-    _mobileController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -49,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             Image.asset('assets/images/logo.png', width: 238.w, height: 238.h),
             Text(
-              'Let’s Get Started',
+              'Welcome Back',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   fontSize: 22,
@@ -59,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(top: 9.h, bottom: 20.h),
               child: Text(
-                'Create an account to get all features',
+                'Login to your account',
                 textAlign: TextAlign.center,
                 style: AppTextStyle.subTitleBlack,
               ),
@@ -73,19 +67,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 11.h,
             ),
             AppTextField(
-                label: 'Email',
-                borderColor: AppColors.lightPrimary,
-                keyboardType: TextInputType.emailAddress,
-                controller: _emailController),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 11.h),
-              child: AppTextField(
-                  label: 'Mobile',
-                  borderColor: AppColors.lightPrimary,
-                  keyboardType: TextInputType.phone,
-                  controller: _mobileController),
-            ),
-            AppTextField(
                 label: 'Password',
                 borderColor: AppColors.lightPrimary,
                 keyboardType: TextInputType.text,
@@ -96,15 +77,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 bottom: 14.h,
               ),
               child: AppButton(
-                text: 'Sign Up',
-                onPressed: () async => await _performSignUp(),
+                text: 'Sign In',
+                onPressed: () async => await _performSignIn(),
               ),
             ),
             RichText(
               softWrap: true,
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: 'Have an account?',
+                text: 'Don\'t have an account?',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -112,40 +93,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: ' Log in',
+                    text: ' Create an account',
                     style: AppTextStyle.titlePrimary,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Navigator.pushReplacementNamed(
-                          context, '/signin_screen'),
+                          context, '/signup_screen'),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 25.h),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _performSignUp() async {
+  Future<void> _performSignIn() async {
     if (_checkData()) {
-      await _signUp();
+      await _signIn();
     }
   }
 
   bool _checkData() {
     if (_nameController.text.isNotEmpty &&
-        _emailController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty &&
-        _mobileController.text.isNotEmpty) {
+        _passwordController.text.isNotEmpty) {
       return true;
     }
     context.showSnackBar(message: 'Enter Required Data', error: true);
     return false;
   }
 
-  Future<void> _signUp() async {
+  Future<void> _signIn() async {
     Navigator.pushReplacementNamed(context, '/view_screen');
   }
 }

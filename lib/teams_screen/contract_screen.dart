@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/teams_screen/contract_tabs/management_contract.dart';
 import 'package:football/teams_screen/contract_tabs/medical_team_contract.dart';
 import 'package:football/teams_screen/contract_tabs/team_member_contract.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,8 +15,9 @@ class ContractScreen extends StatefulWidget {
 
 class _ContractScreenState extends State<ContractScreen> {
   List<String> tabs = <String>[
-    'Team member contract',
-    'Medical team contract',
+    'Team members',
+    'Medical team',
+    'Management',
   ];
   int tabIndex = 0;
 
@@ -24,20 +26,34 @@ class _ContractScreenState extends State<ContractScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CONTRACTS'),
+        actions: [
+          IconButton(
+            padding: EdgeInsetsDirectional.only(end: 17.w),
+            constraints: const BoxConstraints(),
+            onPressed: () {
+              Navigator.pushNamed(context, '/add_user_screen');
+            },
+            icon: const Icon(
+              Icons.add_outlined,
+              color: AppColors.primary,
+              size: 27,
+            ),
+          ),
+        ],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         children: [
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: 40.h,
-              maxWidth: double.infinity.w,
+              maxHeight: 30.h,
+              maxWidth: double.infinity,
             ),
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               separatorBuilder: (context, index) {
                 return SizedBox(
-                  width: 15.w,
+                  width: 25.w,
                 );
               },
               itemCount: tabs.length,
@@ -51,9 +67,9 @@ class _ContractScreenState extends State<ContractScreen> {
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 50),
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    width: 95.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(5.r),
                       color: tabIndex == index
                           ? AppColors.primary
                           : AppColors.white,
@@ -62,8 +78,8 @@ class _ContractScreenState extends State<ContractScreen> {
                       child: Text(
                         tabs[index],
                         style: GoogleFonts.poppins(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
                           color: tabIndex == index
                               ? AppColors.white
                               : AppColors.primary,
@@ -85,6 +101,10 @@ class _ContractScreenState extends State<ContractScreen> {
               Visibility(
                 visible: tabIndex == 1,
                 child: const MedicalTeamContract(),
+              ),
+              Visibility(
+                visible: tabIndex == 2,
+                child: const ManagementContract(),
               ),
             ],
           ),

@@ -22,15 +22,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.only(top: 30.h,bottom: 60.h),
+            padding: EdgeInsetsDirectional.only(top: 30.h, bottom: 60.h),
             child: Column(
               children: [
-                CircleAvatar(
-                    radius: 60.r,
-                    child: Image.asset(
-                      'assets/images/profile.png',
-                      fit: BoxFit.cover,
-                    )),
+                Container(
+                  width: 120.w,
+                  height: 120.h,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Image(
+                    image: AssetImage('assets/images/profile.png'),
+                  ),
+                ),
                 SizedBox(height: 10.h),
                 Text(
                   'KSA Team',
@@ -46,12 +51,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: 'Edit Profile',
             onPressed: () {},
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 11.h),
-            child: CustomListTile(
-              title: 'Sponsers',
-              onPressed: () {},
-            ),
+          CustomListTile(
+            title: 'Sponsors',
+            onPressed: () => Navigator.pushNamed(context, '/sponsor_screen'),
+          ),
+          CustomListTile(
+            title: 'Matches',
+            onPressed: () => Navigator.pushNamed(context, '/matches_list_screen'),
+          ),
+          CustomListTile(
+            title: 'News',
+            onPressed: () => Navigator.pushNamed(context, '/news_screen'),
           ),
           CustomListTile(
             title: 'App Privacy',

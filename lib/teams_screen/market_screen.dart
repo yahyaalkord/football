@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:football/widget/contract_item.dart';
+import 'package:football/widget/market_item.dart';
+import 'package:football/widget/team_member_item.dart';
 
 class MarketScreen extends StatefulWidget {
   const MarketScreen({Key? key}) : super(key: key);
@@ -17,18 +18,16 @@ class _MarketScreenState extends State<MarketScreen> {
         title: const Text('MARKET'),
       ),
       body: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 25.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 25.h),
         separatorBuilder: (context, index) => SizedBox(height: 12.h),
-        itemCount: 4,
+        itemCount: 2,
         itemBuilder: (context, index) {
-          return ContractItem(
-            img: 'assets/images/user2.png',
+          return MarketItem(
+            img: 'assets/images/user3.png',
             name: 'Ahmed Ali',
-            contYear: 'contract is expired',
-            contYearColor: const Color(0xFFBC2F2F),
-            about:
-                'Lorem Ipsum is simply dummy text of the printing and type setting industry Lorem Ipsum has beenthe industry\'s',
             evaluation: 8.4,
+            decContract: 'contract is expired',
+            color: const Color(0xFFBC2F2F),
             onPressed: () {
               Navigator.pushNamed(context, '/player_details_screen');
             },

@@ -11,6 +11,7 @@ class AddTeamScreen extends StatefulWidget {
 }
 
 class _AddTeamScreenState extends State<AddTeamScreen> {
+  late TextEditingController _userNameController;
   late TextEditingController _nameController;
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
@@ -18,6 +19,7 @@ class _AddTeamScreenState extends State<AddTeamScreen> {
   @override
   void initState() {
     super.initState();
+    _userNameController = TextEditingController();
     _nameController = TextEditingController();
     _mobileController = TextEditingController();
     _passwordController = TextEditingController();
@@ -25,6 +27,7 @@ class _AddTeamScreenState extends State<AddTeamScreen> {
 
   @override
   void dispose() {
+    _userNameController.dispose();
     _nameController.dispose();
     _mobileController.dispose();
     _passwordController.dispose();
@@ -41,33 +44,39 @@ class _AddTeamScreenState extends State<AddTeamScreen> {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 25.h),
         children: [
           AppTextField(
-              horizontalPad: 13,
               isColumn: true,
               sizedBox: 9,
-              title: 'Team name',
-              hint: 'team name',
+              title: 'Team username',
+              hint: 'Team username',
               keyboardType: TextInputType.name,
-              controller: _nameController),
+              controller: _userNameController),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 21.h),
+            padding: EdgeInsets.symmetric(vertical: 20.h),
             child: AppTextField(
-                horizontalPad: 13,
                 isColumn: true,
                 sizedBox: 9,
-                title: 'Mobile',
-                hint: '+966767438234',
-                keyboardType: TextInputType.phone,
-                controller: _mobileController),
+                title: 'Team name',
+                hint: 'Team name',
+                keyboardType: TextInputType.name,
+                controller: _nameController),
           ),
           AppTextField(
-              horizontalPad: 13,
               isColumn: true,
               sizedBox: 9,
-              title: 'Password',
-              hint: '******',
-              keyboardType: TextInputType.visiblePassword,
-              controller: _passwordController),
-          SizedBox(height: 33.h),
+              title: 'Mobile',
+              hint: '+966767438234',
+              keyboardType: TextInputType.phone,
+              controller: _mobileController),
+          Padding(
+            padding: EdgeInsetsDirectional.only(top: 20.h,bottom: 33.h),
+            child: AppTextField(
+                isColumn: true,
+                sizedBox: 9,
+                title: 'Password',
+                hint: '******',
+                keyboardType: TextInputType.visiblePassword,
+                controller: _passwordController),
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: AppButton(

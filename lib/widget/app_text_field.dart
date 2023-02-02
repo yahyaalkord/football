@@ -22,8 +22,9 @@ class AppTextField extends StatelessWidget {
     this.title,
     this.minLines,
     this.maxLines = 1,
-    this.horizontalPad = 20,
+    this.horizontalPad = 13,
     this.verticalPad = 0,
+    this.readOnly = false,
   }) : super(key: key);
 
   final String? label;
@@ -44,6 +45,7 @@ class AppTextField extends StatelessWidget {
   final int maxLines;
   final int horizontalPad;
   final int verticalPad;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class AppTextField extends StatelessWidget {
           height: height.h,
           width: double.infinity,
           child: TextField(
+            readOnly: readOnly,
             minLines: minLines,
             maxLines: maxLines,
             cursorColor: AppColors.primary,
@@ -71,7 +74,7 @@ class AppTextField extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             style: GoogleFonts.poppins(
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               color: AppColors.black,
             ),
