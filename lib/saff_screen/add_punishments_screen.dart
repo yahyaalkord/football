@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/context_extenssion.dart';
+import 'package:football/model/admid_all_team.dart';
 import 'package:football/model/dropdow_model.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:football/widget/drop_down.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api_controller/saff_process_api_controller.dart';
+import '../get/saff_process_getx_controller.dart';
+import '../helpers/api_response.dart';
 
 class AddPunishmentScreen extends StatefulWidget {
   const AddPunishmentScreen({Key? key}) : super(key: key);
@@ -15,6 +22,7 @@ class AddPunishmentScreen extends StatefulWidget {
 }
 
 class _AddPunishmentScreenState extends State<AddPunishmentScreen> {
+  SaffProcessGetxController controller = SaffProcessGetxController.to;
   late TextEditingController _titleController;
   late TextEditingController _detailsController;
 
@@ -65,11 +73,37 @@ class _AddPunishmentScreenState extends State<AddPunishmentScreen> {
                   color: AppColors.black),
             ),
           ),
-          CustomDropdown(
-            hint: 'team name',
-              onPressed: () {},
-              itemsTitle: _punishment,
-              valueTitle: selectedPunishment),
+          GetBuilder<SaffProcessGetxController>(
+            builder: (SaffProcessGetxController controller) {
+              List<AdminAllTeam> team = controller.allTeam;
+              if (controller.loading == true) {
+                return CustomDropdown<int>(
+                    hint: 'Waiting',
+                    onChanged:(p0) {
+
+                    },
+                    items: [],
+                    valueTitle: 0);
+              } else if (team.isNotEmpty) {
+                return CustomDropdown<int>(
+                    hint: 'team name',
+                    onChanged:(int? value) {
+                      setState(() {
+                        selectedPunishment = value;
+                      });
+                    },
+                    items: team.map((emp) {
+                      return DropdownMenuItem(
+                        value: emp.id,
+                        child: Text(emp.name),
+                      );
+                    }).toList(),
+                    valueTitle: selectedPunishment);
+              } else {
+                return SizedBox();
+              }
+            },
+          ),
           Padding(
             padding: EdgeInsetsDirectional.only(top: 30.h,bottom: 32.h),
             child: AppTextField(
@@ -88,11 +122,43 @@ class _AddPunishmentScreenState extends State<AddPunishmentScreen> {
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: AppButton(
               text: 'Add Punishment',
-              onPressed: () {},
+              onPressed: () async{
+                await _performAdd();
+              },
             ),
           ),
         ],
       ),
     );
+  }
+  Future<void> _performAdd() async {
+    if (_checkData()) {
+      await _add();
+    }
+  }
+
+  bool _checkData() {
+    if (_titleController.text.isNotEmpty &&
+        _detailsController.text.isNotEmpty &&
+        selectedPunishment!=null) {
+      return true;
+    } else {
+      context.showSnackBar(
+          message: 'Please complete the required data!', error: true);
+      return false;
+    }
+  }
+
+  Future<void> _add() async {
+    ApiResponse apiResponse = await SaffProcessApiController().adminCreatePunishments(title: _titleController.text, description: _detailsController.text, teamId: selectedPunishment!.toString());
+    if(apiResponse.success){
+      context.showSnackBar(message: apiResponse.message);
+      controller.readPunishments();
+      Future.delayed(Duration(seconds: 1),(){
+        Navigator.pop(context);
+      });
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: !apiResponse.success);
+    }
   }
 }

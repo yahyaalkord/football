@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/get/team_process_getx_controller.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/shared_pref_controller/shared_pref_controller.dart';
 import 'package:football/widget/custom_list_tile.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api_controller/auth_api_controller.dart';
+import '../helpers/api_response.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -12,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  TeamProcessGetxController controller =TeamProcessGetxController.to;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  'KSA Team',
+                  SharedPrefController().getValueFor(key: PrefKeys.name.name),
                   style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -46,10 +54,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-          ),
-          CustomListTile(
-            title: 'Edit Profile',
-            onPressed: () => Navigator.pushNamed(context, '/edit_profile_screen'),
           ),
           CustomListTile(
             title: 'Sponsors',
@@ -75,6 +79,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           CustomListTile(
             title: 'Contact Us',
             onPressed: () => Navigator.pushNamed(context, '/contact_screen'),
+            divider: true,
+          ),
+          CustomListTile(
+            title: 'LogOut',
+            onPressed: () async{
+              ApiResponse apiResponse = await AuthApiController().logout();
+              if (apiResponse.success) {
+                Get.delete<TeamProcessGetxController>();
+                Navigator.pushNamedAndRemoveUntil(context, '/login_as_screen', (route) => false);
+              }
+            },
             divider: false,
           ),
           SizedBox(height: 25.h),

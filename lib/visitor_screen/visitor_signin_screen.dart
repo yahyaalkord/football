@@ -1,12 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api_controller/auth_api_controller.dart';
 
 class VisitorSignInScreen extends StatefulWidget {
   const VisitorSignInScreen({Key? key}) : super(key: key);
@@ -16,19 +19,19 @@ class VisitorSignInScreen extends StatefulWidget {
 }
 
 class _VisitorSignInScreenState extends State<VisitorSignInScreen> {
-  late TextEditingController _nameController;
+  late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -59,10 +62,10 @@ class _VisitorSignInScreenState extends State<VisitorSignInScreen> {
               ),
             ),
             AppTextField(
-                label: 'Name',
+                label: 'Email',
                 borderColor: AppColors.lightPrimary,
                 keyboardType: TextInputType.text,
-                controller: _nameController),
+                controller: _emailController),
             SizedBox(
               height: 11.h,
             ),
@@ -115,15 +118,21 @@ class _VisitorSignInScreenState extends State<VisitorSignInScreen> {
   }
 
   bool _checkData() {
-    if (_nameController.text.isNotEmpty &&
+    if (_emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
       return true;
     }
     context.showSnackBar(message: 'Enter Required Data', error: true);
     return false;
   }
-
   Future<void> _signIn() async {
-    Navigator.pushReplacementNamed(context, '/visitor_view_screen');
+    ApiResponse apiResponse = await AuthApiController().userLogin(email: _emailController.text, password: _passwordController.text);
+    if(apiResponse.success){
+      context.showSnackBar(message: apiResponse.message);
+      Navigator.pushReplacementNamed(context, '/visitor_view_screen');
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: !apiResponse.success);
+    }
   }
+
 }

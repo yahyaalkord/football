@@ -14,12 +14,14 @@ class TeamMemberItem extends StatelessWidget {
     required this.endDate,
     required this.evaluation,
     required this.onPressed,
+    this.isData=false,
   }) : super(key: key);
   final String img;
   final String name;
   final String startDate;
   final String endDate;
   final double evaluation;
+  final bool isData;
   final void Function() onPressed;
 
   @override
@@ -29,7 +31,7 @@ class TeamMemberItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,
-          border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+          border: Border.all(color: AppColors.grey, width: 1.5,),
         ),
         padding: EdgeInsetsDirectional.only(start: 8.w, end: 5.w),
         child: Row(
@@ -40,10 +42,10 @@ class TeamMemberItem extends StatelessWidget {
               height: 100.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.r),
-                border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+                border: Border.all(color: AppColors.grey, width: 1.5,),
               ),
               margin: EdgeInsets.symmetric(vertical: 8.h),
-              child: Image.asset(img, fit: BoxFit.cover),
+              child: isData?Image.network(img, fit: BoxFit.cover):Image.asset('assets/images/user.png', fit: BoxFit.cover),
             ),
             Padding(
               padding: EdgeInsetsDirectional.only(
@@ -86,10 +88,10 @@ class TeamMemberItem extends StatelessWidget {
                       SizedBox(width: 4.w),
                       Text(
                         startDate,
-                        style: AppTextStyle.headTitlePrimary,
+                        style: AppTextStyle.headTitleBlack,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: Text(
                           '-',
                           style: AppTextStyle.subTitlePrimary,
@@ -104,7 +106,7 @@ class TeamMemberItem extends StatelessWidget {
                       SizedBox(width: 4.w),
                       Text(
                         endDate,
-                        style: AppTextStyle.headTitlePrimary,
+                        style: AppTextStyle.headTitleBlack,
                       ),
                     ],
                   ),

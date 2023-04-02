@@ -81,7 +81,7 @@ class CustomMatchDetails extends StatelessWidget {
                         ),
                         SizedBox(width: 3.w),
                         Text(
-                          '$startTime - $endTime',
+                          '$startTime  $endTime',
                           style: AppTextStyle.headTitlePrimary,
                         ),
                       ],

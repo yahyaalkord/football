@@ -63,7 +63,7 @@ class MatchItem extends StatelessWidget {
                     ),
                     SizedBox(width: 6.w),
                     Text(
-                      '$startTime - $endTime',
+                      '$startTime  $endTime',
                       style: AppTextStyle.headTitlePrimary,
                     ),
                   ],

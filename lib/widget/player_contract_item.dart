@@ -69,7 +69,7 @@ class PlayerContractItem extends StatelessWidget {
                           style: AppTextStyle.headTitlePrimary,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: Text(
                             '-',
                             style: AppTextStyle.subTitlePrimary,

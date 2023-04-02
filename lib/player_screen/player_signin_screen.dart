@@ -1,12 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api_controller/auth_api_controller.dart';
 
 class PlayerSignInScreen extends StatefulWidget {
   const PlayerSignInScreen({Key? key}) : super(key: key);
@@ -16,19 +18,19 @@ class PlayerSignInScreen extends StatefulWidget {
 }
 
 class _PlayerSignInScreenState extends State<PlayerSignInScreen> {
-  late TextEditingController _nameController;
+  late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -59,10 +61,10 @@ class _PlayerSignInScreenState extends State<PlayerSignInScreen> {
               ),
             ),
             AppTextField(
-                label: 'Name',
+                label: 'Email',
                 borderColor: AppColors.lightPrimary,
                 keyboardType: TextInputType.text,
-                controller: _nameController),
+                controller: _emailController),
             SizedBox(
               height: 11.h,
             ),
@@ -81,27 +83,6 @@ class _PlayerSignInScreenState extends State<PlayerSignInScreen> {
                 onPressed: () async => await _performSignIn(),
               ),
             ),
-            RichText(
-              softWrap: true,
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Don\'t have an account?',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.boldBlack,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: ' Create an account',
-                    style: AppTextStyle.titlePrimary,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => Navigator.pushReplacementNamed(
-                          context, '/player_signup_screen'),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -115,15 +96,21 @@ class _PlayerSignInScreenState extends State<PlayerSignInScreen> {
   }
 
   bool _checkData() {
-    if (_nameController.text.isNotEmpty &&
+    if (_emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
       return true;
     }
     context.showSnackBar(message: 'Enter Required Data', error: true);
     return false;
   }
-
   Future<void> _signIn() async {
-    Navigator.pushReplacementNamed(context, '/player_view_screen');
+    ApiResponse apiResponse = await AuthApiController().playerLogin(email: _emailController.text, password: _passwordController.text);
+    if(apiResponse.success){
+      context.showSnackBar(message: apiResponse.message);
+      Navigator.pushReplacementNamed(context, '/player_view_screen');
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: !apiResponse.success);
+    }
   }
+
 }

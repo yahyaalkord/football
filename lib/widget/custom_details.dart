@@ -17,6 +17,7 @@ class CustomDetails extends StatelessWidget {
     this.bottomPad = 14,
     this.topHeight = 9,
     this.bottomHeight = 12,
+    this.isData= false,
   }) : super(key: key);
   final String img;
   final String name;
@@ -27,6 +28,7 @@ class CustomDetails extends StatelessWidget {
   final int bottomPad;
   final int topHeight;
   final int bottomHeight;
+  final bool isData;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class CustomDetails extends StatelessWidget {
       padding: EdgeInsetsDirectional.only(top: topPad.h, bottom: 19.h),
       decoration: BoxDecoration(
           color: AppColors.white,
-          border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside)),
+          border: Border.all(color: AppColors.grey, width: 1.5, )),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,11 +49,12 @@ class CustomDetails extends StatelessWidget {
                   height: 110.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.r),
-                    border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+                    // border: Border.all(color: AppColors.grey, width: 1.5, ),
+                    border: Border.all(color: AppColors.grey, width: 1.5, ),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.asset(
-                    img,
+                  child: isData? Image.network(img,height: double.infinity,fit: BoxFit.cover,):Image.asset(
+                    'assets/images/user.png',
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/text_style.dart';
 
+import '../api_controller/auth_api_controller.dart';
+import '../helpers/api_response.dart';
+
 class PlayerProfileScreen extends StatefulWidget {
   const PlayerProfileScreen({Key? key}) : super(key: key);
 
@@ -35,7 +38,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
           SizedBox(height: 105.h),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            onTap: () => Navigator.pushNamed(context, '/my_contract_screen'),
+            // onTap: () => Navigator.pushNamed(context, '/my_contract_screen'),
+            onTap: () => Navigator.pushNamed(context, '/player_contracts_screen'),
             dense: true,
             title: Text(
               'My Contract',
@@ -53,8 +57,12 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
           ),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            onTap: () => Navigator.pushReplacementNamed(
-                context, '/player_signin_screen'),
+            onTap: () async{
+              ApiResponse apiResponse = await AuthApiController().logout();
+              if (apiResponse.success) {
+                Navigator.pushNamedAndRemoveUntil(context, '/login_as_screen', (route) => false);
+              }
+            },
             dense: true,
             title: Text(
               'Log Out',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,7 +60,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                   Text(
                     title,
                     style: GoogleFonts.poppins(
-                        fontSize: 12,
+                        fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black.withOpacity(0.30)),
                   ),
@@ -125,13 +126,13 @@ class _AddUserScreenState extends State<AddUserScreen> {
             child: AppButton(
               text: 'Start',
               onPressed: () {
-                if (tabIndex == 0) {
-                  Navigator.pushNamed(context, '/add_player_screen');
-                } else if (tabIndex == 1) {
-                  Navigator.pushNamed(context, '/add_medical_screen');
-                } else {
-                  Navigator.pushNamed(context, '/add_management_screen');
-                }
+                  if (tabIndex == 0) {
+                    Navigator.pushNamed(context, '/add_player_screen');
+                  } else if (tabIndex == 1) {
+                    Navigator.pushNamed(context, '/add_medical_screen');
+                  } else {
+                    Navigator.pushNamed(context, '/add_management_screen');
+                  }
               },
             ),
           ),

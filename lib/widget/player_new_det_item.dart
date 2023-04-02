@@ -11,11 +11,13 @@ class playerNewDetItem extends StatelessWidget {
     required this.title,
     required this.date,
     required this.dec,
+    this.isData=false,
   }) : super(key: key);
   final String img;
   final String title;
   final String date;
   final String dec;
+  final bool isData;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,8 @@ class playerNewDetItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(3.r),
             color: const Color(0xFFE6E6E6),
           ),
-          child: Image.asset(
-            img,
+          child:isData?Image.network(img,height: double.infinity,fit: BoxFit.cover,): Image.asset(
+            'assets/images/new.png',
             fit: BoxFit.cover,
           ),
         ),

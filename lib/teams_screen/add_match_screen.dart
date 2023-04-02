@@ -2,12 +2,17 @@ import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:football/get/team_process_getx_controller.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:football/widget/calender_dialog.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../api_controller/team_process_api_controller.dart';
 
 class AddMatchScreen extends StatefulWidget {
   const AddMatchScreen({Key? key}) : super(key: key);
@@ -17,6 +22,7 @@ class AddMatchScreen extends StatefulWidget {
 }
 
 class _AddMatchScreenState extends State<AddMatchScreen> {
+  TeamProcessGetxController controller = TeamProcessGetxController.to;
   late TextEditingController _dateController;
   late TextEditingController _timeController;
   late TextEditingController _teamAController;
@@ -27,6 +33,7 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
   TimeOfDay timeNow = TimeOfDay.now();
   String date = 'Choose date';
   String selectedTime = 'Choose time';
+  String dateTimeS = '';
 
   @override
   void initState() {
@@ -144,6 +151,7 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
               setState(() {
                 today = day;
                 date = today.toString().split(' ')[0];
+                _dateController.text=date;
                 Navigator.pop(context);
               });
             },
@@ -158,9 +166,15 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
         setState(() {
           timeNow = time;
           selectedTime = timeNow.format(context).toString();
+          _timeController.text=selectedTime;
         });
       },
-      onChangeDateTime: (DateTime dateTime) {},
+      onChangeDateTime: (DateTime dateTime) {
+        setState(() {
+          dateTimeS = DateFormat.Hms().format(dateTime).toString();
+          _timeController.text=selectedTime;
+        });
+      },
       is24HrFormat: false,
       iosStylePicker: false,
       disableHour: false,
@@ -172,6 +186,7 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
   }
 
   Future<void> _performAdd() async {
+    print(dateTimeS);
     if (_checkData()) {
       await _addMatch();
     }
@@ -191,6 +206,22 @@ class _AddMatchScreenState extends State<AddMatchScreen> {
   }
 
   Future<void> _addMatch() async {
-    Navigator.pop(context);
+
+    ApiResponse apiResponse = await TeamProcessApiController().crateMatch(
+        teamA: _teamAController.text,
+        teamB: _teamBController.text,
+        staduim: _stadiumController.text,
+        referee: _refereeController.text,
+        date: date,
+        time: dateTimeS);
+    if(apiResponse.success){
+      context.showSnackBar(message: apiResponse.message);
+      controller.read();
+      Future.delayed(Duration(seconds: 1),() {
+        Navigator.pop(context);
+      },);
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: !apiResponse.success);
+    }
   }
 }

@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/api_controller/team_process_api_controller.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../get/team_process_getx_controller.dart';
+
 class PlayerEvaluationScreen extends StatefulWidget {
-  const PlayerEvaluationScreen({Key? key}) : super(key: key);
+  const PlayerEvaluationScreen({required this.id,Key? key}) : super(key: key);
+  final int id;
 
   @override
   State<PlayerEvaluationScreen> createState() => _PlayerEvaluationScreenState();
 }
 
 class _PlayerEvaluationScreenState extends State<PlayerEvaluationScreen> {
+  TeamProcessGetxController controller =TeamProcessGetxController.to;
+  double rate=0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +52,7 @@ class _PlayerEvaluationScreenState extends State<PlayerEvaluationScreen> {
                 child: Center(
                   child: RatingBar.builder(
                     unratedColor: Colors.black.withOpacity(0.30),
-                    initialRating: 8,
+                    initialRating: 0,
                     minRating: 1,
                     direction: Axis.horizontal,
                     itemSize: 25,
@@ -55,20 +63,34 @@ class _PlayerEvaluationScreenState extends State<PlayerEvaluationScreen> {
                       Icons.star,
                       color: Color(0xFFE28924),
                     ),
-                    onRatingUpdate: (value) {},
+                    onRatingUpdate: (value) {
+                      setState(() {
+                        rate = value;
+                      });
+                    },
                   ),
                 ),
               ),
             ),
             AppButton(
               text: 'Edit Player Evaluation',
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async{
+                await editEvaluation();
               },
             ),
           ],
         ),
       ),
     );
+  }
+  Future<void> editEvaluation() async{
+    ApiResponse apiResponse = await TeamProcessApiController().editEvaluation(id: widget.id, rate: rate.toString());
+    if(apiResponse.success){
+      controller.readTeam(type: 'players');
+      context.showSnackBar(message: apiResponse.message);
+      Navigator.pop(context);
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: true);
+    }
   }
 }

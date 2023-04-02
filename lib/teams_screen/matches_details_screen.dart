@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:football/model/team_match.dart';
 import 'package:football/widget/custom_match_details.dart';
 
 class MatchesDetailsScreen extends StatefulWidget {
-  const MatchesDetailsScreen({Key? key}) : super(key: key);
+  const MatchesDetailsScreen({required this.match,Key? key}) : super(key: key);
+  final TeamMatch match;
 
   @override
   State<MatchesDetailsScreen> createState() => _MatchesDetailsScreenState();
@@ -16,14 +18,14 @@ class _MatchesDetailsScreenState extends State<MatchesDetailsScreen> {
         title: const Text('Matches details'),
       ),
       body: Column(
-        children: const [
+        children:  [
           CustomMatchDetails(
-            teamName: 'Team name',
-            stadiumName: 'Staduim  name',
-            refereeName: 'Referee name',
-            date: '2023-1-23',
-            startTime: '03:00Pm',
-            endTime: '05:00pm',
+            teamName: widget.match.teamA,
+            stadiumName: widget.match.staduim,
+            refereeName: widget.match.referee,
+            date: widget.match.date,
+            startTime: widget.match.time,
+            endTime: '',
           ),
         ],
       ),

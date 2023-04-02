@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/api_controller/auth_api_controller.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/helpers/text_style.dart';
@@ -146,6 +148,13 @@ class _VisitorSignUpScreenState extends State<VisitorSignUpScreen> {
   }
 
   Future<void> _signUp() async {
-    Navigator.pushReplacementNamed(context, '/visitor_view_screen');
+    ApiResponse apiResponse = await AuthApiController().userRegister(name: _nameController.text, email: _emailController.text, password: _passwordController.text, mobile: _mobileController.text);
+    if(apiResponse.success){
+      context.showSnackBar(message: apiResponse.message);
+      Navigator.pushReplacementNamed(context, '/visitor_signin_screen');
+    }else{
+      context.showSnackBar(message: apiResponse.message,error: !apiResponse.success);
+    }
+
   }
 }

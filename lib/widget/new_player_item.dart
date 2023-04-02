@@ -31,7 +31,7 @@ class NewPlayerItem extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: AppColors.white,
-            border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+            border: Border.all(color: AppColors.grey, width: 1.5,),
           ),
           padding: EdgeInsets.symmetric(horizontal: 8.h),
           child: Row(
@@ -42,7 +42,7 @@ class NewPlayerItem extends StatelessWidget {
                 width: 95.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
-                  border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+                  border: Border.all(color: AppColors.grey, width: 1.5,),
                 ),
                 margin: EdgeInsets.symmetric(vertical: 8.h),
                 child: Image.asset(img, fit: BoxFit.cover),

@@ -40,7 +40,7 @@ class _CustomCalenderState extends State<CustomCalender> {
           availableGestures: AvailableGestures.all,
           selectedDayPredicate: widget.selectedDay,
           focusedDay: widget.focusedDay /*today*/,
-          firstDay: DateTime.utc(2022, 12, 1),
+          firstDay: DateTime.utc(1950, 12, 1),
           lastDay: DateTime.utc(2030, 12, 1),
           onDaySelected: widget.onDaySelected,
           // },

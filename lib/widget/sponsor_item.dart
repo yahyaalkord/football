@@ -12,7 +12,7 @@ class SponsorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.only(top: 15.h, bottom: 12.h),
+      padding: EdgeInsetsDirectional.only(top: 10.h, bottom: 10.h),
       decoration: BoxDecoration(
         border: Border.all(
           color: const Color(0xFFBBBBBB),

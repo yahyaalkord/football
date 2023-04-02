@@ -10,11 +10,13 @@ class NewItem extends StatelessWidget {
     required this.img,
     required this.name,
     required this.dec,
+    this.isData=false,
     required this.onPressed,
   }) : super(key: key);
   final String img;
   final String name;
   final String dec;
+  final bool isData;
   final void Function() onPressed;
 
   @override
@@ -27,8 +29,7 @@ class NewItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
               color: AppColors.grey,
-              width: 1.5,
-              strokeAlign: StrokeAlign.outside),
+              width: 1.5,),
         ),
         padding: EdgeInsetsDirectional.only(start: 10.w, end: 8.w),
         child: Row(
@@ -41,7 +42,7 @@ class NewItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(3.r),
               ),
               margin: EdgeInsets.symmetric(vertical: 15.h),
-              child: Image.asset(img, fit: BoxFit.cover),
+              child:isData?Image.network(img, fit: BoxFit.cover): Image.asset('assets/images/new.png', fit: BoxFit.cover),
             ),
             Expanded(
               child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/shared_pref_controller/shared_pref_controller.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,7 +38,8 @@ class _LoginAsScreenState extends State<LoginAsScreen> {
           AppButton(
             text: 'SAFF',
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/saff_signup_screen');
+              Navigator.pushReplacementNamed(context, '/saff_signin_screen');
+              SharedPrefController().saveUserType(userType: 'admin');
             },
             width: 175,
             backgroundColor: AppColors.white,
@@ -49,7 +51,8 @@ class _LoginAsScreenState extends State<LoginAsScreen> {
             child: AppButton(
               text: 'Team',
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/signup_screen');
+                Navigator.pushReplacementNamed(context, '/team_signin_screen');
+                SharedPrefController().saveUserType(userType: 'team');
               },
               width: 175,
               backgroundColor: AppColors.white,
@@ -60,7 +63,8 @@ class _LoginAsScreenState extends State<LoginAsScreen> {
           AppButton(
             text: 'Player',
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/player_signup_screen');
+              Navigator.pushReplacementNamed(context, '/player_signin_screen');
+              SharedPrefController().saveUserType(userType: 'player');
             },
             width: 175,
             backgroundColor: AppColors.white,
@@ -72,6 +76,7 @@ class _LoginAsScreenState extends State<LoginAsScreen> {
             text: 'Visitor',
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/visitor_signup_screen');
+              SharedPrefController().saveUserType(userType: 'user');
             },
             width: 175,
             backgroundColor: AppColors.white,

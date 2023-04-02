@@ -12,12 +12,14 @@ class PlayerNewItem extends StatelessWidget {
     required this.img,
     required this.dec,
     required this.date,
+    this.isData=false,
   }) : super(key: key);
   final void Function() onPressed;
   final String img;
   final String title;
   final String dec;
   final String date;
+  final bool isData;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +52,8 @@ class PlayerNewItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.r),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.asset(
-                    img,
+                  child: isData?Image.network(img,height: double.infinity,fit: BoxFit.cover,):Image.asset(
+                    'assets/images/player.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -74,7 +76,7 @@ class PlayerNewItem extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(top: 89.h, start: 19.w),
             child: Container(
-              width: 99.w,
+              width: 125.w,
               padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 3.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
@@ -85,14 +87,14 @@ class PlayerNewItem extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/svg_images/market.svg',
                     color: AppColors.primary,
-                    width: 12,
-                    height: 13,
+                    width: 12.w,
+                    height: 13.h,
                   ),
                   SizedBox(width: 5.w),
                   Text(
                     date,
                     style: GoogleFonts.poppins(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -15,12 +15,14 @@ class MarketItem extends StatelessWidget {
     required this.color,
     required this.evaluation,
     required this.onPressed,
+     this.isData=false,
   }) : super(key: key);
   final String img;
   final String name;
   final String decContract;
   final Color color;
   final double evaluation;
+  final bool isData;
   final void Function() onPressed;
 
   @override
@@ -34,7 +36,7 @@ class MarketItem extends StatelessWidget {
           border: Border.all(
               color: color,
               width: 1,
-              strokeAlign: StrokeAlign.outside),
+              ),
         ),
         padding: EdgeInsetsDirectional.only(start: 8.w, end: 10.w),
         child: Row(
@@ -48,10 +50,10 @@ class MarketItem extends StatelessWidget {
                 border: Border.all(
                     color: AppColors.grey,
                     width: 1.5,
-                    strokeAlign: StrokeAlign.outside),
+                    ),
               ),
               margin: EdgeInsets.symmetric(vertical: 8.h),
-              child: Image.asset(img, fit: BoxFit.cover),
+              child:isData?Image.network(img, fit: BoxFit.cover): Image.asset('assets/images/user3.png', fit: BoxFit.cover),
             ),
             Padding(
               padding: EdgeInsetsDirectional.only(

@@ -1,6 +1,13 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football/api_controller/team_process_api_controller.dart';
+import 'package:football/get/team_process_getx_controller.dart';
+import 'package:football/helpers/api_response.dart';
+import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 import 'package:football/widget/calender_dialog.dart';
@@ -14,12 +21,14 @@ class AddNewScreen extends StatefulWidget {
 }
 
 class _AddNewScreenState extends State<AddNewScreen> {
+  TeamProcessGetxController controller =TeamProcessGetxController.to;
   late TextEditingController _titleController;
   late TextEditingController _dateController;
   late TextEditingController _desController;
   late TextEditingController _photoController;
   DateTime today = DateTime.now();
   String date = 'Choose date';
+  PlatformFile? pickFile;
 
   @override
   void initState() {
@@ -81,25 +90,30 @@ class _AddNewScreenState extends State<AddNewScreen> {
               controller: _desController),
           Padding(
             padding: EdgeInsetsDirectional.only(top: 16.h, bottom: 75.h),
-            child: AppTextField(
-                readOnly: true,
-                isColumn: true,
-                title: 'New Photo',
-                hint: 'Add photo',
-                suffixIcon: SvgPicture.asset(
-                  'assets/svg_images/photo.svg',
-                  width: 20.w,
-                  height: 20.h,
-                ),
-                keyboardType: TextInputType.name,
-                controller: _photoController),
+            child: InkWell(
+              onTap: () async{
+                await selectFile();
+              },
+              child: AppTextField(
+                  readOnly: true,
+                  isColumn: true,
+                  title: 'New Photo',
+                  hint: 'Add photo',
+                  suffixIcon: SvgPicture.asset(
+                    'assets/svg_images/photo.svg',
+                    width: 20.w,
+                    height: 20.h,
+                  ),
+                  keyboardType: TextInputType.name,
+                  controller: _photoController),
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: AppButton(
               text: 'Add New',
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async{
+                await createNews();
               },
             ),
           ),
@@ -119,10 +133,33 @@ class _AddNewScreenState extends State<AddNewScreen> {
               setState(() {
                 today = day;
                 date = today.toString().split(' ')[0];
+                _dateController.text=date;
                 Navigator.pop(context);
               });
             },
           );
         });
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if(result == null)return;
+    setState(() {
+      pickFile = result.files.first;
+      _photoController.text=pickFile!.name;
+    });
+  }
+
+  Future<void> createNews() async{
+    if(pickFile !=null&&_titleController.text.isNotEmpty&&_desController.text.isNotEmpty&&_dateController.text.isNotEmpty){
+      ApiResponse apiResponse =await TeamProcessApiController().createNews(image: File(pickFile!.path!), title: _titleController.text, description: _desController.text, date: date);
+      if(apiResponse.success){
+        controller.getTeamNews();
+        context.showSnackBar(message: apiResponse.message);
+        Navigator.pop(context);
+      }else{
+        context.showSnackBar(message: apiResponse.message,error: true);
+      }
+    }
   }
 }

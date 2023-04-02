@@ -59,13 +59,13 @@ class CustomContract extends StatelessWidget {
                       width: 14.w,
                       height: 16.h,
                     ),
-                    SizedBox(width: 5.w),
+                    SizedBox(width: 2.w),
                     Text(
                       startDate,
                       style: AppTextStyle.headTitlePrimary,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
                         '-',
                         style: AppTextStyle.subTitlePrimary,
@@ -74,10 +74,10 @@ class CustomContract extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/svg_images/market.svg',
                       color: AppColors.primary,
-                      width: 14.w,
+                      width: 12.w,
                       height: 16.h,
                     ),
-                    SizedBox(width: 5.w),
+                    SizedBox(width: 2.w),
                     Text(
                       endDate,
                       style: AppTextStyle.headTitlePrimary,

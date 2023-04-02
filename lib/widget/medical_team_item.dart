@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:football/helpers/text_style.dart';
 import 'package:football/widget/custom_button.dart';
@@ -14,11 +13,13 @@ class MedicalTeamItem extends StatelessWidget {
     required this.email,
     required this.specialization,
     required this.onPressed,
+    this.isData=false,
   }) : super(key: key);
   final String img;
   final String name;
   final String email;
   final String specialization;
+  final bool isData;
   final void Function() onPressed;
 
   @override
@@ -31,7 +32,7 @@ class MedicalTeamItem extends StatelessWidget {
           border: Border.all(
               color: AppColors.grey,
               width: 1.5,
-              strokeAlign: StrokeAlign.outside),
+              ),
         ),
         padding: EdgeInsetsDirectional.only(start: 8.w, end: 5.w),
         child: Row(
@@ -45,10 +46,10 @@ class MedicalTeamItem extends StatelessWidget {
                 border: Border.all(
                     color: AppColors.grey,
                     width: 1.5,
-                    strokeAlign: StrokeAlign.outside),
+                    ),
               ),
               margin: EdgeInsets.symmetric(vertical: 8.h),
-              child: Image.asset(img, fit: BoxFit.cover),
+              child: isData?Image.network(img, fit: BoxFit.cover):Image.asset('assets/images/user.png', fit: BoxFit.cover),
             ),
             Padding(
               padding: EdgeInsetsDirectional.only(

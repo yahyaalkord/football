@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football/helpers/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,13 +29,13 @@ class AppTextStyle {
   );
 
   static TextStyle headTitlePrimary = GoogleFonts.poppins(
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.primary,
   );
 
   static TextStyle headTitleBlack = GoogleFonts.poppins(
-    fontSize: 10,
+    fontSize: 10.sp,
     fontWeight: FontWeight.w500,
     color: AppColors.black,
   );

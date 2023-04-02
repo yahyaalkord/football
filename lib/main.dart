@@ -11,17 +11,16 @@ import 'package:football/player_screen/player_new_details_screen.dart';
 import 'package:football/player_screen/player_news_screen.dart';
 import 'package:football/player_screen/player_profile_screen.dart';
 import 'package:football/player_screen/player_signin_screen.dart';
-import 'package:football/player_screen/player_signup_screen.dart';
 import 'package:football/player_screen/player_view_screen.dart';
 import 'package:football/saff_screen/add_punishments_screen.dart';
 import 'package:football/saff_screen/add_team_screen.dart';
 import 'package:football/saff_screen/auth/saff_signin_screen.dart';
-import 'package:football/saff_screen/auth/saff_signup_screen.dart';
 import 'package:football/saff_screen/saff_player_details_screen.dart';
 import 'package:football/saff_screen/saff_punishment_screen.dart';
 import 'package:football/saff_screen/saff_view_screen.dart';
 import 'package:football/saff_screen/team_player_screen.dart';
 import 'package:football/saff_screen/teams_screen.dart';
+import 'package:football/shared_pref_controller/shared_pref_controller.dart';
 import 'package:football/teams_screen/about_us_screen.dart';
 import 'package:football/teams_screen/add_contract_screen.dart';
 import 'package:football/teams_screen/add_management_screen.dart';
@@ -31,7 +30,6 @@ import 'package:football/teams_screen/add_new_screen.dart';
 import 'package:football/teams_screen/add_player_screen.dart';
 import 'package:football/teams_screen/add_user_screen.dart';
 import 'package:football/teams_screen/auth/team_signin_screen.dart';
-import 'package:football/teams_screen/auth/signup_screen.dart';
 import 'package:football/teams_screen/contact_screen.dart';
 import 'package:football/teams_screen/matches_details_screen.dart';
 import 'package:football/teams_screen/matches_list_screen.dart';
@@ -58,6 +56,8 @@ import 'package:football/visitor_screen/visitor_view_screen.dart';
 import 'helpers/app_colors.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPref();
   runApp(const MyApp());
 }
 
@@ -94,8 +94,18 @@ class MyApp extends StatelessWidget {
             '/launch_screen': (context) => const LaunchScreen(),
             '/login_as_screen': (context) => const LoginAsScreen(),
 
+            // SAFF Screens
+            '/saff_signin_screen': (context) => const SaffSignInScreen(),
+            '/saff_view_screen': (context) => const SaffViewScreen(),
+            '/teams_screen': (context) => const TeamsScreen(),
+            '/add_team_screen': (context) => const AddTeamScreen(),
+            '/saff_punishment_screen': (context) =>
+            const SaffPunishmentScreen(),
+            '/add_punishments_screen': (context) => const AddPunishmentScreen(),
+            // '/team_player_screen': (context) => const TeamPlayerScreen(),
+            // '/saff_player_details_screen': (context) => const SaffPlayerDetailsScreen(),
+
             // Teams Screens
-            '/signup_screen': (context) => const SignUpScreen(),
             '/team_signin_screen': (context) => const TeamSignInScreen(),
             '/view_screen': (context) => const ViewScreen(),
             '/stats_screen': (context) => const StatsScreen(),
@@ -103,50 +113,32 @@ class MyApp extends StatelessWidget {
             '/market_screen': (context) => const MarketScreen(),
             '/punishment_screen': (context) => const PunishmentScreen(),
             '/profile_screen': (context) => const ProfileScreen(),
-            '/player_details_screen': (context) => const PlayerDetailsScreen(),
+            // '/player_details_screen': (context) => const PlayerDetailsScreen(),
             '/add_contract_screen': (context) => const AddContractScreen(),
             '/add_match_screen': (context) => const AddMatchScreen(),
             '/matches_list_screen': (context) => const MatchesListScreen(),
-            '/matches_details_screen': (context) =>
-                const MatchesDetailsScreen(),
+            // '/matches_details_screen': (context) => const MatchesDetailsScreen(),
             '/add_user_screen': (context) => const AddUserScreen(),
             '/add_player_screen': (context) => const AddPlayerScreen(),
             '/add_medical_screen': (context) => const AddMedicalScreen(),
             '/add_management_screen': (context) => const AddManagementScreen(),
-            '/player_evaluation_screen': (context) =>
-                const PlayerEvaluationScreen(),
+            // '/player_evaluation_screen': (context) => const PlayerEvaluationScreen(),
             '/sponsor_screen': (context) => const SponsorsScreen(),
             '/news_screen': (context) => const NewsScreen(),
             '/add_new_screen': (context) => const AddNewScreen(),
-            '/new_details_screen': (context) => const NewDetailsScreen(),
+            // '/new_details_screen': (context) => const NewDetailsScreen(),
             '/contact_screen': (context) => const ContactScreen(),
             '/about_us_screen': (context) => const AboutUsScreen(),
             '/privacy_screen': (context) => const PrivacyScreen(),
 
-            // SAFF Screens
-            '/saff_signup_screen': (context) => const SaffSignUpScreen(),
-            '/saff_signin_screen': (context) => const SaffSignInScreen(),
-            '/saff_view_screen': (context) => const SaffViewScreen(),
-            '/teams_screen': (context) => const TeamsScreen(),
-            '/add_team_screen': (context) => const AddTeamScreen(),
-            '/saff_punishment_screen': (context) =>
-                const SaffPunishmentScreen(),
-            '/add_punishments_screen': (context) => const AddPunishmentScreen(),
-            '/team_player_screen': (context) => const TeamPlayerScreen(),
-            '/saff_player_details_screen': (context) =>
-                const SaffPlayerDetailsScreen(),
-
             // Player Screens
             '/player_signin_screen': (context) => const PlayerSignInScreen(),
-            '/player_signup_screen': (context) => const PlayerSignUpScreen(),
             '/player_view_screen': (context) => const PlayerViewScreen(),
             '/player_news_screen': (context) => const PlayerNewsScreen(),
-            '/player_new_details_screen': (context) =>
-                const PlayerNewDetailsScreen(),
+            // '/player_new_details_screen': (context) => const PlayerNewDetailsScreen(),
             '/player_contracts_screen': (context) =>
                 const PlayerContractsScreen(),
-            '/contract_details_screen': (context) =>
-                const ContractDetailsScreen(),
+            // '/contract_details_screen': (context) => const ContractDetailsScreen(),
             '/my_contract_screen': (context) => const MyContractScreen(),
             '/matches_screen': (context) => const MatchesScreen(),
             '/player_profile_screen': (context) => const PlayerProfileScreen(),

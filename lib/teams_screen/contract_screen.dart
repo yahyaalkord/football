@@ -6,6 +6,8 @@ import 'package:football/teams_screen/contract_tabs/medical_team_contract.dart';
 import 'package:football/teams_screen/contract_tabs/team_member_contract.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../get/team_process_getx_controller.dart';
+
 class ContractScreen extends StatefulWidget {
   const ContractScreen({Key? key}) : super(key: key);
 
@@ -14,12 +16,18 @@ class ContractScreen extends StatefulWidget {
 }
 
 class _ContractScreenState extends State<ContractScreen> {
+  TeamProcessGetxController controller =TeamProcessGetxController.to;
   List<String> tabs = <String>[
     'Team members',
     'Medical team',
     'Management',
   ];
   int tabIndex = 0;
+  @override
+  void initState() {
+    controller.readTeam(type: 'players');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +72,17 @@ class _ContractScreenState extends State<ContractScreen> {
                     setState(() {
                       tabIndex = index;
                     });
+                    if(index == 0){
+                      controller.readTeam(type: 'players');
+                    } else if(index == 1){
+                      controller.readTeam(type: 'medicals');
+                    }else{
+                      controller.readTeam(type: 'mangments');
+                    }
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 50),
-                    width: 95.w,
+                    width: 100.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: tabIndex == index

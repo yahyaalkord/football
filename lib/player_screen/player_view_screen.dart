@@ -6,6 +6,7 @@ import 'package:football/player_screen/matches_screen.dart';
 import 'package:football/player_screen/player_contracts_screen.dart';
 import 'package:football/player_screen/player_news_screen.dart';
 import 'package:football/player_screen/player_profile_screen.dart';
+import 'package:football/player_screen/stars_player_screen.dart';
 import 'package:football/widget/bottom_nav_item.dart';
 
 class PlayerViewScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _PlayerViewScreenState extends State<PlayerViewScreen> {
   int selectedScreenIndex = 0;
 
   List<ScreenModel> screens = [
+    ScreenModel(screen: const PlayerStatsScreen()),
     ScreenModel(screen: const PlayerNewsScreen()),
     ScreenModel(screen: const PlayerContractsScreen()),
     ScreenModel(screen: const MatchesScreen()),
@@ -50,34 +52,42 @@ class _PlayerViewScreenState extends State<PlayerViewScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BottomNavItem(
-              title: 'News',
+              title: 'Stats',
               onPressed: () {
                 setState(() => selectedScreenIndex = 0);
               },
-              icon: 'news',
+              icon: 'stats',
               isSelected: selectedScreenIndex == 0,
             ),
             BottomNavItem(
-              title: 'Contracts',
-              onPressed: () => setState(() => selectedScreenIndex = 1),
-              icon: 'file',
+              title: 'News',
+              onPressed: () {
+                setState(() => selectedScreenIndex = 1);
+              },
+              icon: 'news',
               isSelected: selectedScreenIndex == 1,
+            ),
+            BottomNavItem(
+              title: 'Contracts',
+              onPressed: () => setState(() => selectedScreenIndex = 2),
+              icon: 'file',
+              isSelected: selectedScreenIndex == 2,
             ),
             BottomNavItem(
               title: 'Matches',
               onPressed: () {
-                setState(() => selectedScreenIndex = 2);
+                setState(() => selectedScreenIndex = 3);
               },
               icon: 'market',
-              isSelected: selectedScreenIndex == 2,
+              isSelected: selectedScreenIndex == 3,
             ),
             BottomNavItem(
               title: 'Profile',
               onPressed: () {
-                setState(() => selectedScreenIndex = 3);
+                setState(() => selectedScreenIndex = 4);
               },
               icon: 'profile',
-              isSelected: selectedScreenIndex == 3,
+              isSelected: selectedScreenIndex == 4,
             ),
           ],
         ),

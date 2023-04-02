@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/api_controller/team_process_api_controller.dart';
+import 'package:football/helpers/api_response.dart';
+import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
 
@@ -63,7 +66,7 @@ class _AddManagementScreenState extends State<AddManagementScreen> {
               title: 'Mobile',
               hint: 'mobile',
               keyboardType: TextInputType.emailAddress,
-              controller: _emailController),
+              controller: _mobileController),
           SizedBox(height: 17.h),
           AppTextField(
               isColumn: true,
@@ -76,11 +79,34 @@ class _AddManagementScreenState extends State<AddManagementScreen> {
                 top: 79.h, bottom: 30.h, start: 14.w, end: 14.w),
             child: AppButton(
               text: 'Add Management User',
-              onPressed: () => Navigator.pop(context),
+              onPressed: () async => await teamMangementCreate(),
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> teamMangementCreate() async {
+    if (_nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _mobileController.text.isNotEmpty) {
+      ApiResponse apiResponse = await TeamProcessApiController()
+          .teamMangementCreate(
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
+              type: 'Mangement',
+              mobile: _mobileController.text);
+      if (apiResponse.success) {
+        context.showSnackBar(message: apiResponse.message);
+        Navigator.pop(context);
+      } else {
+        context.showSnackBar(message: apiResponse.message, error: true);
+      }
+    }else{
+      context.showSnackBar(message: 'check your required data!', error: true);
+    }
   }
 }

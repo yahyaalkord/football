@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football/api_controller/team_process_api_controller.dart';
+import 'package:football/helpers/api_response.dart';
 import 'package:football/helpers/app_colors.dart';
+import 'package:football/helpers/context_extenssion.dart';
 import 'package:football/model/dropdow_model.dart';
 import 'package:football/widget/app_button.dart';
 import 'package:football/widget/app_text_field.dart';
@@ -19,6 +22,7 @@ class _AddMedicalScreenState extends State<AddMedicalScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late TextEditingController _mobileController;
+  late TextEditingController _specializationController;
 
   @override
   void initState() {
@@ -27,6 +31,7 @@ class _AddMedicalScreenState extends State<AddMedicalScreen> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _mobileController = TextEditingController();
+    _specializationController = TextEditingController();
   }
 
   @override
@@ -35,6 +40,7 @@ class _AddMedicalScreenState extends State<AddMedicalScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _mobileController.dispose();
+    _specializationController.dispose();
     super.dispose();
   }
 
@@ -74,7 +80,7 @@ class _AddMedicalScreenState extends State<AddMedicalScreen> {
               title: 'Mobile',
               hint: 'mobile',
               keyboardType: TextInputType.emailAddress,
-              controller: _emailController),
+              controller: _mobileController),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 17.h),
             child: AppTextField(
@@ -84,29 +90,48 @@ class _AddMedicalScreenState extends State<AddMedicalScreen> {
                 keyboardType: TextInputType.visiblePassword,
                 controller: _passwordController),
           ),
-          Text(
-            'Specialization',
-            style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black),
-          ),
           SizedBox(height: 8.h),
-          CustomDropdown(
-            hint: 'specialization',
-              onPressed: () {},
-              itemsTitle: _specialization,
-              valueTitle: selectedSpecialization),
+          AppTextField(
+              isColumn: true,
+              title: 'Specialization',
+              hint: 'Specialization',
+              keyboardType: TextInputType.text,
+              controller: _specializationController),
           Padding(
             padding: EdgeInsetsDirectional.only(
                 top: 34.h, bottom: 30.h, start: 14.w, end: 14.w),
             child: AppButton(
               text: 'Add Medical User',
-              onPressed: () => Navigator.pop(context),
+              onPressed: () async=>await teamMedicalCreate(),
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> teamMedicalCreate() async {
+    if(_nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _mobileController.text.isNotEmpty&&_specializationController.text.isNotEmpty){
+      ApiResponse apiResponse = await TeamProcessApiController()
+          .teamMedicalCreate(
+          name: _nameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+          mobile: _mobileController.text,
+          type: 'Medical',
+          Specialization: _specializationController.text);
+      if(apiResponse.success){
+        context.showSnackBar(message: apiResponse.message);
+        Navigator.pop(context);
+      }else{
+        context.showSnackBar(message: apiResponse.message,error: true);
+      }
+    }else{
+      context.showSnackBar(message: 'check your required data!', error: true);
+    }
+
   }
 }

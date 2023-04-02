@@ -14,6 +14,7 @@ class PlayerItem extends StatelessWidget {
     required this.about,
     required this.evaluation,
     required this.onPressed,
+    this.isData = false,
   }) : super(key: key);
   final String img;
   final String name;
@@ -21,6 +22,7 @@ class PlayerItem extends StatelessWidget {
   final String about;
   final double evaluation;
   final void Function() onPressed;
+  final bool isData;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class PlayerItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: AppColors.white,
-              border: Border.all(color: AppColors.grey, width: 1.5, strokeAlign: StrokeAlign.outside),
+              border: Border.all(color: AppColors.grey, width: 1.5,),
             ),
             padding: EdgeInsets.symmetric(horizontal: 8.h),
             child: Row(
@@ -41,10 +43,10 @@ class PlayerItem extends StatelessWidget {
                   width: 95.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.r),
-                    border: Border.all(color: AppColors.grey, width: 15, strokeAlign: StrokeAlign.outside),
+                    border: Border.all(color: AppColors.grey, width: 15, ),
                   ),
                   margin: EdgeInsets.symmetric(vertical: 8.h),
-                  child: Image.asset(img, fit: BoxFit.cover),
+                  child: isData?Image.network(img,height: double.infinity,fit: BoxFit.cover,) :Image.asset('assets/images/user2.png', fit: BoxFit.cover),
                 ),
                 Expanded(
                   child: Padding(
